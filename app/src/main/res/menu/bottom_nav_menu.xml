@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/clicktab_icon"
+        android:title="@string/title_clicking" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/shoptab_icon"
+        android:title="@string/title_shop" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/customizationtab_icon"
+        android:title="@string/title_customization" />
+
+    <item
+        android:id="@+id/navigation_notHome"
+        android:icon="@drawable/test"
+        android:title="@string/title_test" />
+
+</menu>
