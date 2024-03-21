@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Testing</string>
+    <string name="app_name">Virus Clicker</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_test">Test Tab</string>
     <string name="title_clicking">Clicking Tab</string>
     <string name="title_shop">Shop</string>
     <string name="title_customization">Customize</string>
     <string name="Color">Color</string>
+    <string name="Color2">Color2</string>
 </resources>
