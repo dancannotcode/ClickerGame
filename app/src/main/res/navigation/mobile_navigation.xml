@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.testing.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.example.testing.ui.customizationTab.CustomizationFragment"
+        android:label="@string/title_customization"
+        tools:layout="@layout/fragment_customization" />
 
     <fragment
         android:id="@+id/navigation_notHome"
