@@ -8,4 +8,8 @@
     <string name="title_customization">Customize</string>
     <string name="Color">Color</string>
     <string name="Color2">Color2</string>
+    <string name="homepage">Homepage</string>
+    <string name="new_game">New Game</string>
+    <string name="continue_game">Continue Game</string>
+    <string name="viral_clicker">Viral\nClicker</string>
 </resources>
