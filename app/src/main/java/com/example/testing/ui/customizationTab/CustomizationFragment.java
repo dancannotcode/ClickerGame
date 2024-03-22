@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.testing.databinding.FragmentCustomizationBinding;
 
-public class CustomizationFragment extends Fragment {
+public class CustomizationFragment extends Fragment implements View.OnClickListener{
 
     private FragmentCustomizationBinding binding;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         com.example.testing.ui.customizationTab.CustomizationViewModel notificationsViewModel =
@@ -25,13 +24,13 @@ public class CustomizationFragment extends Fragment {
         return binding.getRoot();
 
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    public void changeColor_black(View view) {
+    @Override
+    public void onClick(View v) {
     }
 }

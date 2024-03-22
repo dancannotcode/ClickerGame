@@ -28,12 +28,10 @@
         android:layout_marginTop="148dp"
         android:src="@drawable/test_enemy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/red" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/color_button"
-        android:onClick="changeColor_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
