@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_homepage"
+        android:icon="@drawable/homepage"
+        android:title="@string/homepage" />
+
+    <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/clicktab_icon"
         android:title="@string/title_clicking" />
@@ -20,5 +25,6 @@
         android:id="@+id/navigation_notHome"
         android:icon="@drawable/test"
         android:title="@string/title_test" />
+
 
 </menu>
