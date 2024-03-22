@@ -29,4 +29,9 @@
         android:label="Testing Fragment"
         tools:layout="@layout/fragment_nothome" />
 
+    <fragment
+        android:id="@+id/navigation_homepage"
+        android:name="com.example.testing.ui.Homepage.HomepageFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_homepage" />
 </navigation>
