@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +19,21 @@ public class CustomizationFragment extends Fragment{
 
     private FragmentCustomizationBinding binding;
     ImageView enemy;
+    ImageView enemy2;
+    ImageView currentEnemy;
+    Button enemy1Button;
+    Button enemy2Button;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View CustomizationFragment = inflater.inflate(R.layout.fragment_customization, container, false);
-        // Get the count text view
         enemy = CustomizationFragment.findViewById(R.id.enemy);
+        enemy2 = CustomizationFragment.findViewById(R.id.enemy2);
+        enemy1Button = CustomizationFragment.findViewById(R.id.enemy1Button);
+        enemy2Button = CustomizationFragment.findViewById(R.id.enemy2Button);
+        currentEnemy = enemy;
+        enemy1Button.setBackgroundColor(Color.LTGRAY);
+
+
         com.example.testing.ui.customizationTab.CustomizationViewModel CustomizationViewModel =
                 new ViewModelProvider(this).get(com.example.testing.ui.customizationTab.CustomizationViewModel.class);
 
@@ -41,6 +51,46 @@ public class CustomizationFragment extends Fragment{
                 changeColor(color);
             }
 
+        });
+        view.findViewById(R.id.purple_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int color = Color.MAGENTA;
+                changeColor(color);
+            }
+
+        });
+        view.findViewById(R.id.yellow_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int color = Color.YELLOW;
+                changeColor(color);
+            }
+
+        });
+        view.findViewById(R.id.green_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int color = Color.GREEN;
+                changeColor(color);
+            }
+
+        });
+        view.findViewById(R.id.enemy1Button).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                enemy1Button.setBackgroundColor(Color.LTGRAY);
+                enemy2Button.setBackgroundColor(Color.TRANSPARENT);
+                currentEnemy = enemy;
+            }
+        });
+        view.findViewById(R.id.enemy2Button).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                enemy2Button.setBackgroundColor(Color.LTGRAY);
+                enemy1Button.setBackgroundColor(Color.TRANSPARENT);
+                currentEnemy = enemy2;
+            }
         });
         view.findViewById(R.id.blue_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +110,8 @@ public class CustomizationFragment extends Fragment{
         });
     }
     private void changeColor(int color) {
-        enemy.setColorFilter(color);
+        currentEnemy.setColorFilter(color);
+
     }
     @Override
     public void onDestroyView() {
