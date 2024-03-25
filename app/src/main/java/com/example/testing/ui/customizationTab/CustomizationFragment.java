@@ -34,24 +34,32 @@ public class CustomizationFragment extends Fragment{
 
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        view.findViewById(R.id.color_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.black_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int color = Color.BLACK;
-                changeColor(view, color);
+                changeColor(color);
             }
 
         });
-        view.findViewById(R.id.color_button2).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.blue_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int color = Color.BLUE;
-                changeColor(view, color);
+                changeColor(color);
+            }
+
+        });
+        view.findViewById(R.id.red_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int color = Color.RED;
+                changeColor(color);
             }
 
         });
     }
-    private void changeColor(View view,int color) {
+    private void changeColor(int color) {
         enemy.setColorFilter(color);
     }
     @Override
