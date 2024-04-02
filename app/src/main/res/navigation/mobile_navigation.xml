@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/navigation_customizationcheck"
-        android:name="com.example.testing.ui.customizationTab.CustomizationCheckFragment"
+        android:name="com.example.testing.ui.customizationCheck.CustomizationCheckFragment"
         android:label="Customization Check"
         tools:layout="@layout/fragment_customizationcheck"
         >

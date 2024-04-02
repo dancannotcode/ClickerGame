@@ -1,4 +1,4 @@
-package com.example.testing.ui.customizationTab;
+package com.example.testing.ui.customizationCheck;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

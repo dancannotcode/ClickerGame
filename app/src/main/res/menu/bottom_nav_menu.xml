@@ -15,15 +15,15 @@
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/shoptab_icon"
         android:title="@string/title_shop" />
-<!--    <item-->
-<!--        android:id="@+id/navigation_customizationcheck"-->
-<!--        android:icon="@drawable/customizationtab_icon"-->
-<!--        android:title="@string/title_customization" />-->
-
     <item
-        android:id="@+id/navigation_customization"
+        android:id="@+id/navigation_customizationcheck"
         android:icon="@drawable/customizationtab_icon"
         android:title="@string/title_customization" />
+
+<!--    <item-->
+<!--        android:id="@+id/navigation_customization"-->
+<!--        android:icon="@drawable/customizationtab_icon"-->
+<!--        android:title="@string/title_customization" />-->
 
     <item
         android:id="@+id/navigation_notHome"
