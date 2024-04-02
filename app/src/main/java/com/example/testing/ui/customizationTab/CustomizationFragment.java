@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentCustomizationBinding;
@@ -107,6 +108,13 @@ public class CustomizationFragment extends Fragment{
                 changeColor(color);
             }
 
+        });
+        view.findViewById(R.id.customizationBack).setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(CustomizationFragment.this).navigate(R.id.action_navigation_notifications_to_navigation_customizationcheck);
+            }
         });
     }
     private void changeColor(int color) {

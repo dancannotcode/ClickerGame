@@ -46,7 +46,7 @@
         tools:layout="@layout/fragment_customizationcheck"
         >
         <action
-            android:id="@+id/action_navigation_customizationcheck_to_navigation_notifications"
+            android:id="@+id/action_navigation_customizationcheck_to_navigation_customization"
             app:destination="@id/navigation_customization" />
     </fragment>
 </navigation>
