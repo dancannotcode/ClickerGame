@@ -15,20 +15,33 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:text="@string/CustomizationCheck"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/customizationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="158dp"
         android:layout_marginEnd="159dp"
-        android:layout_marginBottom="447dp"
-        android:text="Button"
+        android:layout_marginBottom="440dp"
+        android:background="@drawable/circlebutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/plus_sign"
+        android:layout_width="68dp"
+        android:layout_height="66dp"
+        android:src="@drawable/plus_symbol"
+        android:translationZ="90dp"
+        app:layout_constraintBottom_toBottomOf="@+id/customizationButton"
+        app:layout_constraintEnd_toEndOf="@+id/customizationButton"
+        app:layout_constraintStart_toStartOf="@+id/customizationButton"
+        app:layout_constraintTop_toTopOf="@+id/customizationButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
