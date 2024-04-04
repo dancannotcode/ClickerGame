@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
-
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
 // *    Author: global_warming
@@ -56,12 +55,8 @@ public class HomeFragment extends Fragment {
                     }
                 });
                 mediaPlayer.start();
-
-
             }
-
         });
-
     }
 
     @Override
