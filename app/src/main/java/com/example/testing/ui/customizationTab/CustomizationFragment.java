@@ -109,7 +109,7 @@ public class CustomizationFragment extends Fragment{
             }
 
         });
-        view.findViewById(R.id.customizationBack).setOnClickListener(new View.OnClickListener(){
+        view.findViewById(R.id.submit_Button).setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {

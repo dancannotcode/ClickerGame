@@ -29,9 +29,9 @@
 
     <fragment
         android:id="@+id/navigation_notHome"
-        android:name="com.example.testing.ui.notHome.NotHomeFragment"
-        android:label="Testing Fragment"
-        tools:layout="@layout/fragment_nothome" />
+        android:name="com.example.testing.ui.collectionTab.collectionFragment"
+        android:label="@string/title_collection"
+        tools:layout="@layout/fragment_collection" />
 
     <fragment
         android:id="@+id/navigation_homepage"

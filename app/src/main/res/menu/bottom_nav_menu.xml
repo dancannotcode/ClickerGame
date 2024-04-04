@@ -21,15 +21,10 @@
         android:icon="@drawable/customizationtab_icon"
         android:title="@string/title_customization" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_customization"-->
-<!--        android:icon="@drawable/customizationtab_icon"-->
-<!--        android:title="@string/title_customization" />-->
-
     <item
         android:id="@+id/navigation_notHome"
-        android:icon="@drawable/test"
-        android:title="@string/title_test" />
+        android:icon="@drawable/collections_label"
+        android:title="@string/title_collection" />
 
 
 </menu>

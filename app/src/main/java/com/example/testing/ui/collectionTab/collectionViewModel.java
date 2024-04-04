@@ -1,11 +1,11 @@
-package com.example.testing.ui.notHome;
+package com.example.testing.ui.collectionTab;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotHomeViewModel extends ViewModel {
+public class collectionViewModel extends ViewModel {
 
-    public NotHomeViewModel() {
+    public collectionViewModel() {
         MutableLiveData<String> mText = new MutableLiveData<>();
         mText.setValue("This is a brand new Fragment");
     }
