@@ -34,6 +34,16 @@ public class HomeFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.reset();
+                        mp.release();
+                        mp = null;
+                    }
+                });
+                mediaPlayer.start();
                 moveImage();
             }
         });
@@ -70,25 +80,25 @@ public class HomeFragment extends Fragment {
 // *
 // ***************************************************************************************/
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        view.findViewById(R.id.text_home).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.reset();
-                        mp.release();
-                        mp = null;
-                    }
-                });
-                mediaPlayer.start();
-            }
-        });
-    }
+//    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        view.findViewById(R.id.text_home).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
+//                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                    @Override
+//                    public void onCompletion(MediaPlayer mp) {
+//                        mp.reset();
+//                        mp.release();
+//                        mp = null;
+//                    }
+//                });
+//                mediaPlayer.start();
+//            }
+//        });
+//    }
 
     @Override
     public void onDestroyView() {
