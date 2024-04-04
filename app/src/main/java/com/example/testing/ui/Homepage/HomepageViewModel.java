@@ -10,7 +10,7 @@ public class HomepageViewModel extends ViewModel {
 
     public HomepageViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is homepage fragment");
     }
 
     public LiveData<String> getText() {
