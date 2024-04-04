@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/navigation_homepage">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -37,16 +37,16 @@
         android:id="@+id/navigation_homepage"
         android:name="com.example.testing.ui.Homepage.HomepageFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_homepage"/>
+        tools:layout="@layout/fragment_homepage" >
+        <action
+            android:id="@+id/action_navigation_homepage_to_navigation_home"
+            app:destination="@id/navigation_home" />
 
     <fragment
         android:id="@+id/navigation_customizationcheck"
         android:name="com.example.testing.ui.customizationCheck.CustomizationCheckFragment"
         android:label="Customization Check"
-        tools:layout="@layout/fragment_customizationcheck"
-        >
-        <action
-            android:id="@+id/action_navigation_customizationcheck_to_navigation_customization"
-            app:destination="@id/navigation_customization" />
+        tools:layout="@layout/fragment_customizationcheck>
+
     </fragment>
 </navigation>

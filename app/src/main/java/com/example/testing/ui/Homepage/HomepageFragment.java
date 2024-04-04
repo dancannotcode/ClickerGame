@@ -8,19 +8,26 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.example.testing.databinding.FragmentHomeBinding;
+import androidx.navigation.fragment.NavHostFragment;
+import com.example.testing.R;
+import com.example.testing.databinding.FragmentHomepageBinding;
 
 public class HomepageFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private FragmentHomepageBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomepageViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomepageViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentHomepageBinding.inflate(inflater, container, false);
+        binding.btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(HomepageFragment.this).navigate(R.id.action_navigation_homepage_to_navigation_home);
+            }
+        });
         return binding.getRoot();
     }
 

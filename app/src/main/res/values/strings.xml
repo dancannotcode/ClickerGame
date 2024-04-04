@@ -11,4 +11,7 @@
     <string name="homepage">Homepage</string>
     <string name="Named">Disease Name</string>
     <string name="CustomizationCheck">You have remaining creations, press the button to begin creating</string>
+    <string name="new_game">New Game</string>
+    <string name="continue_game">Continue Game</string>
+    <string name="viral_clicker">Viral\nClicker</string>
 </resources>
