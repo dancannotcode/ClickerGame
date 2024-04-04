@@ -1,4 +1,4 @@
-package com.example.testing.ui.notHome;
+package com.example.testing.ui.collectionTab;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.testing.databinding.FragmentNothomeBinding;
+import com.example.testing.databinding.FragmentCollectionBinding;
 
-public class NotHomeFragment extends Fragment{
+public class collectionFragment extends Fragment{
 
-    private FragmentNothomeBinding binding;
+    private FragmentCollectionBinding binding;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentNothomeBinding.inflate(inflater, container, false);
+        binding = FragmentCollectionBinding.inflate(inflater, container, false);
 
         return binding.getRoot();
 

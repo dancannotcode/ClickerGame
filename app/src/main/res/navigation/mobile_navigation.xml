@@ -18,16 +18,20 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_customization"
         android:name="com.example.testing.ui.customizationTab.CustomizationFragment"
         android:label="@string/title_customization"
-        tools:layout="@layout/fragment_customization" />
+        tools:layout="@layout/fragment_customization" >
+        <action
+            android:id="@+id/action_navigation_notifications_to_navigation_customizationcheck"
+            app:destination="@id/navigation_customizationcheck" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notHome"
-        android:name="com.example.testing.ui.notHome.NotHomeFragment"
-        android:label="Testing Fragment"
-        tools:layout="@layout/fragment_nothome" />
+        android:name="com.example.testing.ui.collectionTab.collectionFragment"
+        android:label="@string/title_collection"
+        tools:layout="@layout/fragment_collection" />
 
     <fragment
         android:id="@+id/navigation_homepage"
@@ -37,5 +41,12 @@
         <action
             android:id="@+id/action_navigation_homepage_to_navigation_home"
             app:destination="@id/navigation_home" />
+
+    <fragment
+        android:id="@+id/navigation_customizationcheck"
+        android:name="com.example.testing.ui.customizationCheck.CustomizationCheckFragment"
+        android:label="Customization Check"
+        tools:layout="@layout/fragment_customizationcheck>
+
     </fragment>
 </navigation>

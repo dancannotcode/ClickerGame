@@ -2,15 +2,16 @@
     <string name="app_name">Virus Clicker</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_test">Test Tab</string>
+    <string name="title_collection">Collection</string>
     <string name="title_clicking">Clicking Tab</string>
     <string name="title_shop">Shop</string>
     <string name="title_customization">Customize</string>
     <string name="Color">Color</string>
     <string name="Color2">Color2</string>
     <string name="homepage">Homepage</string>
+    <string name="Named">Disease Name</string>
+    <string name="CustomizationCheck">You have remaining creations, press the button to begin creating</string>
     <string name="new_game">New Game</string>
     <string name="continue_game">Continue Game</string>
     <string name="viral_clicker">Viral\nClicker</string>
-
 </resources>

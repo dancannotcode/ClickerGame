@@ -1,11 +1,11 @@
-package com.example.testing.ui.notHome;
+package com.example.testing.ui.customizationCheck;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NotHomeViewModel extends ViewModel {
+public class CustomizationCheckViewModel extends ViewModel {
 
-    public NotHomeViewModel() {
+    public CustomizationCheckViewModel() {
         MutableLiveData<String> mText = new MutableLiveData<>();
         mText.setValue("This is a brand new Fragment");
     }
