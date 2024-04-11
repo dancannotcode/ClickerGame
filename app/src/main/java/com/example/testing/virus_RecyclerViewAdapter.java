@@ -53,7 +53,6 @@ public class virus_RecyclerViewAdapter extends RecyclerView.Adapter<virus_Recycl
             super(itemView);
             imageView = itemView.findViewById(R.id.virusImageCollection);
             virusName = itemView.findViewById(R.id.virusNameCollection);
-
         }
     }
 }

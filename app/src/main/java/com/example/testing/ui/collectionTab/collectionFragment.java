@@ -1,9 +1,11 @@
 package com.example.testing.ui.collectionTab;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentCollectionBinding;
+import com.example.testing.ui.customizationTab.CustomizationFragment;
 import com.example.testing.virusModel;
 import com.example.testing.virus_RecyclerViewAdapter;
 
@@ -24,6 +27,7 @@ public class collectionFragment extends Fragment{
 
     ArrayList<virusModel> virusModel = new ArrayList<>();
 
+    String[] virusName = {"Name: ???????","Name: ???????","Name: ???????","Name: ???????","Name: ???????","Name: ???????","Name: ???????"};
     int[] virusPicture = {R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark};
     private FragmentCollectionBinding binding;
 
@@ -31,13 +35,15 @@ public class collectionFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentCollectionBinding.inflate(inflater, container, false);
-
         return binding.getRoot();
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        virusPicture[1] = R.drawable.cell_enemy;
+        virusPicture[0] = R.drawable.bacteria_enemy;
+        virusName[0] = "Name: Test";
         RecyclerView recyclerView = view.findViewById(R.id.virusRecyclerView);
         setVirusModel();
         virus_RecyclerViewAdapter adapter = new virus_RecyclerViewAdapter(getContext(),virusModel);
@@ -63,7 +69,7 @@ public class collectionFragment extends Fragment{
     }
 
     private void setVirusModel(){
-        String[] virusName = getResources().getStringArray(R.array.virus_names);
+        //String[] virusName = getResources().getStringArray(R.array.virus_names);
         String[] virusType = getResources().getStringArray(R.array.virus_type);
         String[] virusColor = getResources().getStringArray(R.array.virus_color);
 
