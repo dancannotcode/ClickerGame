@@ -14,4 +14,32 @@
     <string name="new_game">New Game</string>
     <string name="continue_game">Continue Game</string>
     <string name="viral_clicker">Viral\nClicker</string>
+    <string name="unknown_virus">Name: ??????????</string>
+    <string-array name="virus_names">
+        <item>Name: ????????</item>
+        <item>Name: ????????</item>
+        <item>Name: ????????</item>
+        <item>Name: ????????</item>
+        <item>Name: ????????</item>
+        <item>Name: ????????</item>
+        <item>Name: ????????</item>
+    </string-array>
+    <string-array name="virus_color">
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+    </string-array>
+    <string-array name="virus_type">
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+    </string-array>
 </resources>
