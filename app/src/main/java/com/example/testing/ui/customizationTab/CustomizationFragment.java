@@ -114,6 +114,7 @@ public class CustomizationFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 NavHostFragment.findNavController(CustomizationFragment.this).navigate(R.id.action_navigation_notifications_to_navigation_customizationcheck);
+
             }
         });
     }
