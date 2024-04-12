@@ -9,8 +9,18 @@
     <string name="Color">Color</string>
     <string name="Color2">Color2</string>
     <string name="homepage">Homepage</string>
-    <string name="new_game">New Game</string>
+    <string name="play_game">Play game</string>
     <string name="continue_game">Continue Game</string>
     <string name="viral_clicker">Viral\nClicker</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 
 </resources>
