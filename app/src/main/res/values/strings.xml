@@ -10,6 +10,11 @@
     <string name="Color2">Color2</string>
     <string name="homepage">Homepage</string>
     <string name="play_game">Play game</string>
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
