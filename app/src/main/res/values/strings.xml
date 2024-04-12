@@ -10,8 +10,6 @@
     <string name="Color2">Color2</string>
     <string name="homepage">Homepage</string>
     <string name="play_game">Play game</string>
-    <string name="continue_game">Continue Game</string>
-    <string name="viral_clicker">Viral\nClicker</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
