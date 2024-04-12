@@ -25,7 +25,7 @@ public class HomepageFragment extends Fragment {
         binding.btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(HomepageFragment.this).navigate(R.id.action_navigation_homepage_to_navigation_home);
+                NavHostFragment.findNavController(HomepageFragment.this).navigate(R.id.action_navigation_homepage_to_navigation_login);
             }
         });
         return binding.getRoot();
