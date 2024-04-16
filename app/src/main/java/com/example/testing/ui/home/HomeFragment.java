@@ -2,12 +2,15 @@ package com.example.testing.ui.home;
 
 
 
+import android.graphics.drawable.ClipDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.testing.R;
+
+import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentHomeBinding;
 import android.media.*;
+import android.widget.ProgressBar;
 
 public class HomeFragment extends Fragment {
 
@@ -23,7 +27,6 @@ public class HomeFragment extends Fragment {
     private ImageView imageView;
     private boolean isImageVisible = true;
     MediaPlayer mediaPlayer = new MediaPlayer();
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class HomeFragment extends Fragment {
                 });
                 mediaPlayer.start();
                 moveImage();
+
             }
         });
 

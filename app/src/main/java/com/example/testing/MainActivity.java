@@ -1,6 +1,7 @@
 package com.example.testing;
 
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,5 +42,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         firestore = FirebaseFirestore.getInstance();
+
     }
 }

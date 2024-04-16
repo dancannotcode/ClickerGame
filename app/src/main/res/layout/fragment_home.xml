@@ -8,13 +8,14 @@
     tools:context=".ui.home.HomeFragment">
 
     <ProgressBar
-        android:id="@+id/progress_horizontal"
+        android:id="@+id/progress_Horizontal"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progress="67"
         app:layout_constraintEnd_toStartOf="parent"
-        tools:layout_editor_absoluteY="19dp" />
+        tools:layout_editor_absoluteY="19dp"
+        android:progressDrawable="@drawable/custom_progress_bar" />
 
     <ImageView
         android:id="@+id/imageView"
