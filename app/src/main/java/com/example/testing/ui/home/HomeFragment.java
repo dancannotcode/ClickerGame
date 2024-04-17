@@ -84,6 +84,12 @@ public class HomeFragment extends Fragment {
 
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
 
+        // Reset progress bar to show leveling up
+        if(currentProgress >= 100)
+        {
+            currentProgress = 0;
+        }
+
         currentProgress = currentProgress + 5;
         progressBar.setProgress(currentProgress);
         progressBar.setMax(100);
