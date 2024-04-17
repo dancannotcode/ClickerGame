@@ -1,5 +1,7 @@
 package com.example.testing.ui.collectionTab;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
