@@ -28,6 +28,9 @@ public class HomeFragment extends Fragment {
     private boolean isImageVisible = true;
     MediaPlayer mediaPlayer = new MediaPlayer();
 
+    private int currentProgress = 0;
+    private ProgressBar progressBar;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -48,6 +51,7 @@ public class HomeFragment extends Fragment {
                 });
                 mediaPlayer.start();
                 moveImage();
+                clickProgression();
 
             }
         });
@@ -74,6 +78,16 @@ public class HomeFragment extends Fragment {
 
         // Toggle the visibility state
         isImageVisible = !isImageVisible;
+    }
+
+    private void clickProgression() {
+
+        progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
+
+        currentProgress = currentProgress + 5;
+        progressBar.setProgress(currentProgress);
+        progressBar.setMax(100);
+
     }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
