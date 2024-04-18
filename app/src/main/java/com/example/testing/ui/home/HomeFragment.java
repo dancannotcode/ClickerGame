@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentHomeBinding;
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         imageView = binding.getRoot().findViewById(R.id.imageView);
+
+
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
         imageView.setOnClickListener(new View.OnClickListener() {
