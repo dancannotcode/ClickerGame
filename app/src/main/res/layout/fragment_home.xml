@@ -29,14 +29,17 @@
         android:layout_width="0dp"
         android:layout_height="36dp"
         android:src="@drawable/cell_enemy"
+        app2:layout_constraintBottom_toBottomOf="parent"
+        app2:layout_constraintEnd_toEndOf="parent"
+        app2:layout_constraintHorizontal_bias="0.0"
+        app2:layout_constraintStart_toStartOf="parent"
+        app2:layout_constraintTop_toBottomOf="@+id/progress_Horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.21"
-        tools2:layout_editor_absoluteX="193dp"
-        tools2:layout_editor_absoluteY="153dp"
         tools:ignore="ExtraText" />
 
     <TextView

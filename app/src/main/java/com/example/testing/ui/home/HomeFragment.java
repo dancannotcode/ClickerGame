@@ -23,6 +23,8 @@ import android.media.*;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
@@ -72,9 +74,24 @@ public class HomeFragment extends Fragment {
     private void moveImage() {
         if (isImageVisible) {
             // If image is visible, change its position
+
+            // Use Random number generator to move enemy widget to a random
+            // location
+
+            int max = 200;
+            int min = -200;
+
+            Random random1 = new java.util.Random();
+            Integer randomNumber1 = 0;
+            randomNumber1 = random1.nextInt((max - min) + 1) + min;
+
+            Random random2 = new java.util.Random();
+            Integer randomNumber2 = 0;
+            randomNumber2 = random2.nextInt((max - min) + 1) + min;
+
             imageView.animate()
-                    .translationXBy(100)  // Move it 100 pixels to the right
-                    .translationYBy(100)  // Move it 100 pixels down
+                    .translationXBy(randomNumber1)  // Move it a random amount of pixels to the right or left
+                    .translationYBy(randomNumber2)  // Move it a random amount of pixels upward or downward
                     .setDuration(500)     // Animation duration
                     .start();
         } else {
