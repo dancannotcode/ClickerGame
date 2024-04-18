@@ -15,6 +15,7 @@ import com.example.testing.databinding.FragmentCollectionBinding;
 import com.example.testing.virusModel;
 import com.example.testing.virus_RecyclerViewAdapter;
 import java.util.ArrayList;
+import com.example.testing.saveData;
 
 
 public class collectionFragment extends Fragment{
@@ -40,9 +41,6 @@ public class collectionFragment extends Fragment{
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
-        virusPicture[1] = R.drawable.cell_enemy;
-        virusPicture[0] = R.drawable.bacteria_enemy;
-        virusName[0] = "Name: Test";
         RecyclerView recyclerView = view.findViewById(R.id.virusRecyclerView);
         setVirusModel();
         virus_RecyclerViewAdapter adapter = new virus_RecyclerViewAdapter(getContext(),virusModel);
@@ -82,6 +80,10 @@ public class collectionFragment extends Fragment{
      * area full of all viruses that the user has created between every run.
      */
     private void setVirusModel(){
+        saveData saveData = new saveData();
+        String[] virusName = saveData.getVirusName();
+        int[] virusPicture = saveData.getVirusPicture();
+        saveData.setVirusNamePart("Test", 1);
         String[] virusType = getResources().getStringArray(R.array.virus_type);
         String[] virusColor = getResources().getStringArray(R.array.virus_color);
 

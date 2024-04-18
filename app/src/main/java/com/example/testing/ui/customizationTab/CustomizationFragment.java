@@ -17,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentCustomizationBinding;
+import com.example.testing.saveData;
 
 public class CustomizationFragment extends Fragment{
 
@@ -27,6 +28,7 @@ public class CustomizationFragment extends Fragment{
     Button enemy1Button;
     Button enemy2Button;
     EditText nameField;
+    int currentCustomization = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -118,8 +120,11 @@ public class CustomizationFragment extends Fragment{
 
             @Override
             public void onClick(View v) {
-                Log.v("Virus Name", nameField.getText().toString());
+                saveData saveData = new saveData();
                 String virusName = nameField.getText().toString();
+                Log.v("Virus Name", virusName);
+                saveData.setVirusNamePart(virusName, currentCustomization);
+                currentCustomization++;
                 NavHostFragment.findNavController(CustomizationFragment.this).navigate(R.id.action_navigation_notifications_to_navigation_customizationcheck);
 
             }
