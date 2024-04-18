@@ -17,7 +17,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentCustomizationBinding;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class CustomizationFragment extends Fragment{
 
