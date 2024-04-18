@@ -27,7 +27,7 @@
     <string name="continue_game">Continue Game</string>
     <string name="viral_clicker">Viral\nClicker</string>
     <string name="unknown_virus">Name: ??????????</string>
-    <string name="home_heading">Level %d.</string>
+    <string name="home_heading">0</string>
     <string-array name="virus_color">
         <item>color.black</item>
         <item>color.black</item>

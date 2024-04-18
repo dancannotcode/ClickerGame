@@ -21,6 +21,7 @@ import com.example.testing.R;
 import com.example.testing.databinding.FragmentHomeBinding;
 import android.media.*;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 
@@ -32,15 +33,20 @@ public class HomeFragment extends Fragment {
     private int currentProgress = 0;
     private ProgressBar progressBar;
 
+    private int levelCount = 0;
+    TextView showLevelTextView;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View fragmentHomeLayout = binding.getRoot();
         imageView = binding.getRoot().findViewById(R.id.imageView);
-
-
+        showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
         imageView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
@@ -54,10 +60,11 @@ public class HomeFragment extends Fragment {
                 });
                 mediaPlayer.start();
                 moveImage();
-                clickProgression();
+                clickProgression(v);
 
             }
         });
+
 
         return binding.getRoot();
     }
@@ -83,19 +90,30 @@ public class HomeFragment extends Fragment {
         isImageVisible = !isImageVisible;
     }
 
-    private void clickProgression() {
+    private void clickProgression(View v) {
 
+
+        // Get the value of the text view
+        String countString = showLevelTextView.getText().toString();
+        Integer count = Integer.parseInt(countString);
+
+        // Display the new value in the text view.
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
 
         // Reset progress bar to show leveling up
         if(currentProgress >= 100)
         {
             currentProgress = 0;
+            // Convert value to a number and increment it
+            count++;
+            levelCount = count;
         }
 
         currentProgress = currentProgress + 5;
         progressBar.setProgress(currentProgress);
         progressBar.setMax(100);
+
+        showLevelTextView.setText(count.toString());
 
     }
 // ***************************************************************************************/
@@ -126,6 +144,7 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 //    }
+
 
     @Override
     public void onDestroyView() {
