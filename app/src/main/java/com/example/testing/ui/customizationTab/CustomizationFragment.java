@@ -2,10 +2,12 @@ package com.example.testing.ui.customizationTab;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentCustomizationBinding;
+import com.example.testing.saveData;
 
 public class CustomizationFragment extends Fragment{
 
@@ -24,6 +27,9 @@ public class CustomizationFragment extends Fragment{
     ImageView currentEnemy;
     Button enemy1Button;
     Button enemy2Button;
+    EditText nameField;
+    int currentCustomization = 0;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View CustomizationFragment = inflater.inflate(R.layout.fragment_customization, container, false);
@@ -33,6 +39,7 @@ public class CustomizationFragment extends Fragment{
         enemy2Button = CustomizationFragment.findViewById(R.id.enemy2Button);
         currentEnemy = enemy;
         enemy1Button.setBackgroundColor(Color.LTGRAY);
+        nameField = CustomizationFragment.findViewById(R.id.virus_name);
 
 
         com.example.testing.ui.customizationTab.CustomizationViewModel CustomizationViewModel =
@@ -113,6 +120,11 @@ public class CustomizationFragment extends Fragment{
 
             @Override
             public void onClick(View v) {
+                saveData saveData = new saveData();
+                String virusName = nameField.getText().toString();
+                Log.v("Virus Name", virusName);
+                saveData.setVirusNamePart(virusName, currentCustomization);
+                currentCustomization++;
                 NavHostFragment.findNavController(CustomizationFragment.this).navigate(R.id.action_navigation_notifications_to_navigation_customizationcheck);
 
             }

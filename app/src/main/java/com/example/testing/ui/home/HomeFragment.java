@@ -1,7 +1,6 @@
 package com.example.testing.ui.home;
 
 
-
 import android.graphics.drawable.ClipDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import com.example.testing.databinding.FragmentHomeBinding;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -142,25 +142,6 @@ public class HomeFragment extends Fragment {
 // *
 // ***************************************************************************************/
 
-//    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//
-//        view.findViewById(R.id.text_home).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
-//                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override
-//                    public void onCompletion(MediaPlayer mp) {
-//                        mp.reset();
-//                        mp.release();
-//                        mp = null;
-//                    }
-//                });
-//                mediaPlayer.start();
-//            }
-//        });
-//    }
 
 
     @Override

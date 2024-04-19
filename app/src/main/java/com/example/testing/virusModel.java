@@ -6,7 +6,6 @@ public class virusModel {
     String virusName;
     int image;
 
-
     public virusModel(String virusColor, String virusType, String virusName, int image) {
         this.virusColor = virusColor;
         this.virusType = virusType;
