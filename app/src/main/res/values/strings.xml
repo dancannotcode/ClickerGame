@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Virus Clicker</string>
     <string name="title_home">Home</string>
@@ -10,8 +11,6 @@
     <string name="Color2">Color2</string>
     <string name="homepage">Homepage</string>
     <string name="play_game">Play game</string>
-    <string name="continue_game">Continue Game</string>
-    <string name="viral_clicker">Viral\nClicker</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -25,4 +24,26 @@
     <string name="Named">Disease Name</string>
     <string name="CustomizationCheck">You have remaining creations, press the button to begin creating</string>
     <string name="new_game">New Game</string>
+    <string name="continue_game">Continue Game</string>
+    <string name="viral_clicker">Viral\nClicker</string>
+    <string name="unknown_virus">Name: ??????????</string>
+    <string name="home_heading">0</string>
+    <string-array name="virus_color">
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+        <item>color.black</item>
+    </string-array>
+    <string-array name="virus_type">
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+        <item>Bacteria</item>
+    </string-array>
 </resources>
