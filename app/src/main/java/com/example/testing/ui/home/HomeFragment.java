@@ -1,15 +1,29 @@
 package com.example.testing.ui.home;
 
+
+import android.graphics.drawable.ClipDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.testing.R;
+
+import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.testing.databinding.FragmentHomeBinding;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.testing.R;
+import com.example.testing.databinding.FragmentHomeBinding;
+import android.media.*;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class HomeFragment extends Fragment {
 
@@ -18,14 +32,23 @@ public class HomeFragment extends Fragment {
     private boolean isImageVisible = true;
     MediaPlayer mediaPlayer = new MediaPlayer();
 
+    private int currentProgress = 0;
+    private ProgressBar progressBar;
+
+    private int levelCount = 0;
+    TextView showLevelTextView;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View fragmentHomeLayout = binding.getRoot();
         imageView = binding.getRoot().findViewById(R.id.imageView);
+        showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
         imageView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
@@ -39,8 +62,11 @@ public class HomeFragment extends Fragment {
                 });
                 mediaPlayer.start();
                 moveImage();
+                clickProgression(v);
+
             }
         });
+
 
         return binding.getRoot();
     }
@@ -48,9 +74,24 @@ public class HomeFragment extends Fragment {
     private void moveImage() {
         if (isImageVisible) {
             // If image is visible, change its position
+
+            // Use Random number generator to move enemy widget to a random
+            // location
+
+            int max = 200;
+            int min = -200;
+
+            Random random1 = new java.util.Random();
+            Integer randomNumber1 = 0;
+            randomNumber1 = random1.nextInt((max - min) + 1) + min;
+
+            Random random2 = new java.util.Random();
+            Integer randomNumber2 = 0;
+            randomNumber2 = random2.nextInt((max - min) + 1) + min;
+
             imageView.animate()
-                    .translationXBy(100)  // Move it 100 pixels to the right
-                    .translationYBy(100)  // Move it 100 pixels down
+                    .translationXBy(randomNumber1)  // Move it a random amount of pixels to the right or left
+                    .translationYBy(randomNumber2)  // Move it a random amount of pixels upward or downward
                     .setDuration(500)     // Animation duration
                     .start();
         } else {
@@ -65,6 +106,33 @@ public class HomeFragment extends Fragment {
         // Toggle the visibility state
         isImageVisible = !isImageVisible;
     }
+
+    private void clickProgression(View v) {
+
+
+        // Get the value of the text view
+        String countString = showLevelTextView.getText().toString();
+        Integer count = Integer.parseInt(countString);
+
+        // Display the new value in the text view.
+        progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
+
+        // Reset progress bar to show leveling up
+        if(currentProgress >= 100)
+        {
+            currentProgress = 0;
+            // Convert value to a number and increment it
+            count++;
+            levelCount = count;
+        }
+
+        currentProgress = currentProgress + 5;
+        progressBar.setProgress(currentProgress);
+        progressBar.setMax(100);
+
+        showLevelTextView.setText(count.toString());
+
+    }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
 // *    Author: global_warming
@@ -73,6 +141,7 @@ public class HomeFragment extends Fragment {
 // *    Availability: https://stackoverflow.com/questions/48534509/my-android-app-stop-playing-sound-on-button-tap-after-some-time
 // *
 // ***************************************************************************************/
+
 
 
     @Override
