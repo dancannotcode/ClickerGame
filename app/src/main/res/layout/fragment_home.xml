@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"
-        android:progress="67"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_progress_bar"
         app2:layout_constraintEnd_toEndOf="parent"
         app2:layout_constraintHorizontal_bias="0.0"

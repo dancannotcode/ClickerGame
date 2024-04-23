@@ -1,25 +1,17 @@
 package com.example.testing.ui.home;
 
 
-import android.graphics.drawable.ClipDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.testing.R;
-
-import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.testing.databinding.FragmentHomeBinding;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.fragment.NavHostFragment;
-
-import com.example.testing.R;
-import com.example.testing.databinding.FragmentHomeBinding;
-import android.media.*;
+import com.example.testing.saveData;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -45,6 +37,15 @@ public class HomeFragment extends Fragment {
         View fragmentHomeLayout = binding.getRoot();
         imageView = binding.getRoot().findViewById(R.id.imageView);
         showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
+        saveData saveData = new saveData();
+        currentProgress = saveData.getCurrentProgress();
+        levelCount = saveData.getLevelCount();
+
+        // Get the value of the text view and set level from save.
+        String countString = showLevelTextView.getText().toString();
+        Integer count = Integer.parseInt(countString);
+        count = count + levelCount;
+        showLevelTextView.setText(count.toString());
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +118,10 @@ public class HomeFragment extends Fragment {
         // Display the new value in the text view.
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
 
+        int level = levelCount * 100;
+
         // Reset progress bar to show leveling up
-        if(currentProgress >= 100)
+        if(currentProgress >= level)
         {
             currentProgress = 0;
             // Convert value to a number and increment it
@@ -126,12 +129,12 @@ public class HomeFragment extends Fragment {
             levelCount = count;
         }
 
-        currentProgress = currentProgress + 5;
+        Random r = new Random();
+        int randExp = r.nextInt(15) + 1;
+        currentProgress = currentProgress + randExp;
         progressBar.setProgress(currentProgress);
-        progressBar.setMax(100);
-
+        progressBar.setMax(level);
         showLevelTextView.setText(count.toString());
-
     }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
