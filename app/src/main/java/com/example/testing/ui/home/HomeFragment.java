@@ -1,6 +1,5 @@
 package com.example.testing.ui.home;
 
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
