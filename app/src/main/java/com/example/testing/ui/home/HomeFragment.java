@@ -20,6 +20,8 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private ImageView imageView;
+    private ImageView[] enemies = new ImageView[5];
+
     private boolean isImageVisible = true;
     MediaPlayer mediaPlayer = new MediaPlayer();
 
@@ -34,7 +36,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View fragmentHomeLayout = binding.getRoot();
-        imageView = binding.getRoot().findViewById(R.id.imageView);
+        enemies[0] = fragmentHomeLayout.findViewById(R.id.imageView); // Adjust IDs based on your layout XML
+        enemies[1] = fragmentHomeLayout.findViewById(R.id.imageView2);
+        enemies[2] = fragmentHomeLayout.findViewById(R.id.imageView3);
+        enemies[3] = fragmentHomeLayout.findViewById(R.id.imageView4);
+        enemies[4] = fragmentHomeLayout.findViewById(R.id.imageView5);
         showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
         saveData saveData = new saveData();
         currentProgress = saveData.getCurrentProgress();
@@ -47,31 +53,33 @@ public class HomeFragment extends Fragment {
         showLevelTextView.setText(count.toString());
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
-        imageView.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            // Set OnClickListener to move the ImageView to a different spot when clicked
+        for (int i = 0; i < enemies.length; i++) {
+                final int finalI = i;
+                enemies[finalI].setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.reset();
-                        mp.release();
-                        mp = null;
+                    public void onClick(View v) {
+                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
+                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.reset();
+                                mp.release();
+                                mp = null;
+                            }
+                        });
+                        mediaPlayer.start();
+                        moveImage(enemies[finalI]); // Corrected here
+                        clickProgression(v);
                     }
                 });
-                mediaPlayer.start();
-                moveImage();
-                clickProgression(v);
-
             }
-        });
+            return binding.getRoot();
+
+        }
 
 
-        return binding.getRoot();
-    }
-
-    private void moveImage() {
+    private void moveImage(ImageView imageView) {
         if (isImageVisible) {
             // If image is visible, change its position
 
