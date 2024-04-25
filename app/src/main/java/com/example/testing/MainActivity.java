@@ -41,10 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Configuration of top-level destinations in the app's navigation graph
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_homepage, R.id.navigation_dashboard, R.id.navigation_customizationcheck,
-                R.id.navigation_login, R.id.navigation_customization
-        ).build();
-
+        R.id.navigation_homepage, R.id.navigation_dashboard, R.id.navigation_customizationcheck).build();
         // Navigation controller setup for managing UI navigation within the app
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
