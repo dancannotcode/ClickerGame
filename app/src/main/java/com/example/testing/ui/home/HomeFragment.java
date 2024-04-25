@@ -27,6 +27,7 @@ public class HomeFragment extends Fragment {
 
     private int currentProgress = 0;
     private ProgressBar progressBar;
+    private int clickNum = 0;
 
     private int levelCount = 0;
     TextView showLevelTextView;
@@ -43,6 +44,7 @@ public class HomeFragment extends Fragment {
         enemies[4] = fragmentHomeLayout.findViewById(R.id.imageView5);
         showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
         saveData saveData = new saveData();
+        clickNum = saveData.getClickNum();
         currentProgress = saveData.getCurrentProgress();
         levelCount = saveData.getLevelCount();
 
@@ -53,30 +55,33 @@ public class HomeFragment extends Fragment {
         showLevelTextView.setText(count.toString());
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
-            // Set OnClickListener to move the ImageView to a different spot when clicked
+        // Set OnClickListener to move the ImageView to a different spot when clicked
         for (int i = 0; i < enemies.length; i++) {
-                final int finalI = i;
-                enemies[finalI].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
-                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                            @Override
-                            public void onCompletion(MediaPlayer mp) {
-                                mp.reset();
-                                mp.release();
-                                mp = null;
-                            }
-                        });
-                        mediaPlayer.start();
-                        moveImage(enemies[finalI]); // Corrected here
-                        clickProgression(v);
-                    }
-                });
-            }
-            return binding.getRoot();
+            final int finalI = i;
+            enemies[finalI].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.reset();
+                            mp.release();
+                            mp = null;
+                        }
+                    });
+                    mediaPlayer.start();
+                    moveImage(enemies[finalI]);
+                    clickProgression(v);
+                    clickNum++;
+                    saveData.setClickNum(clickNum);
 
+                }
+            });
         }
+
+        return binding.getRoot();
+    }
 
 
     private void moveImage(ImageView imageView) {
@@ -126,6 +131,7 @@ public class HomeFragment extends Fragment {
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
 
         int level = levelCount * 100;
+        int levelScale = 15 * levelCount;
 
         // Reset progress bar to show leveling up
         if(currentProgress >= level)
@@ -137,7 +143,7 @@ public class HomeFragment extends Fragment {
         }
 
         Random r = new Random();
-        int randExp = r.nextInt(15) + 1;
+        int randExp = r.nextInt(levelScale) + 1;
         currentProgress = currentProgress + randExp;
         progressBar.setProgress(currentProgress);
         progressBar.setMax(level);
