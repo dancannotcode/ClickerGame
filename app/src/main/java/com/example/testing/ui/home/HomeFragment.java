@@ -14,7 +14,15 @@ import com.example.testing.saveData;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class HomeFragment extends Fragment {
 
@@ -27,7 +35,6 @@ public class HomeFragment extends Fragment {
 
     private int currentProgress = 0;
     private ProgressBar progressBar;
-    private int clickNum = 0;
 
     private int levelCount = 0;
     TextView showLevelTextView;
@@ -37,14 +44,14 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View fragmentHomeLayout = binding.getRoot();
-        enemies[0] = fragmentHomeLayout.findViewById(R.id.imageView); // Adjust IDs based on your layout XML
+        //displays the images
+        enemies[0] = fragmentHomeLayout.findViewById(R.id.imageView);
         enemies[1] = fragmentHomeLayout.findViewById(R.id.imageView2);
         enemies[2] = fragmentHomeLayout.findViewById(R.id.imageView3);
         enemies[3] = fragmentHomeLayout.findViewById(R.id.imageView4);
         enemies[4] = fragmentHomeLayout.findViewById(R.id.imageView5);
         showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
         saveData saveData = new saveData();
-        clickNum = saveData.getClickNum();
         currentProgress = saveData.getCurrentProgress();
         levelCount = saveData.getLevelCount();
 
@@ -55,33 +62,30 @@ public class HomeFragment extends Fragment {
         showLevelTextView.setText(count.toString());
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
-        // Set OnClickListener to move the ImageView to a different spot when clicked
+            // Set OnClickListener to move the ImageView to a different spot when clicked
         for (int i = 0; i < enemies.length; i++) {
-            final int finalI = i;
-            enemies[finalI].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
-                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            mp.reset();
-                            mp.release();
-                            mp = null;
-                        }
-                    });
-                    mediaPlayer.start();
-                    moveImage(enemies[finalI]);
-                    clickProgression(v);
-                    clickNum++;
-                    saveData.setClickNum(clickNum);
+                final int enemyIndex = i;
+                enemies[enemyIndex].setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mediaPlayer = MediaPlayer.create(getContext(), R.raw.gameclick);
+                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.reset();
+                                mp.release();
+                                mp = null;
+                            }
+                        });
+                        mediaPlayer.start();
+                        moveImage(enemies[enemyIndex]); // moves the enemy widget
+                        clickProgression(v);
+                    }
+                });
+            }
+            return binding.getRoot();
 
-                }
-            });
         }
-
-        return binding.getRoot();
-    }
 
 
     private void moveImage(ImageView imageView) {
@@ -121,8 +125,27 @@ public class HomeFragment extends Fragment {
     }
 
     private void clickProgression(View v) {
+        //get user ID to track score/click count
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
+        int score = 0;
 
+        assert userEmail != null;
+        FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                            AtomicInteger clicksMade = new AtomicInteger();
+                            if (documentSnapshot.exists()) {
+                                // If document exists, retrieve clicks made
+                                clicksMade.set(documentSnapshot.getLong("Clicks_Made").intValue());
+                            }
+        //increase clicks made
+        clicksMade.incrementAndGet();
+        //stores the click made
+                    FirebaseFirestore.getInstance().collection(userEmail).document(userId)
+                            .set(new HashMap<String, Object>() {{
+                                put("Clicks_Made", clicksMade.intValue());
+                            }});
         // Get the value of the text view
         String countString = showLevelTextView.getText().toString();
         Integer count = Integer.parseInt(countString);
@@ -131,7 +154,6 @@ public class HomeFragment extends Fragment {
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
 
         int level = levelCount * 100;
-        int levelScale = 15 * levelCount;
 
         // Reset progress bar to show leveling up
         if(currentProgress >= level)
@@ -143,11 +165,12 @@ public class HomeFragment extends Fragment {
         }
 
         Random r = new Random();
-        int randExp = r.nextInt(levelScale) + 1;
+        int randExp = r.nextInt(15) + 1;
         currentProgress = currentProgress + randExp;
         progressBar.setProgress(currentProgress);
         progressBar.setMax(level);
         showLevelTextView.setText(count.toString());
+                });
     }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
