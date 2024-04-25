@@ -14,6 +14,9 @@ import com.example.testing.R;
 import com.example.testing.databinding.FragmentLoginBinding;
 import com.example.testing.ui.Homepage.HomepageFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 /**
  * A {@link Fragment} subclass that provides login and registration functionalities
@@ -114,10 +117,23 @@ public class LoginFragment extends Fragment {
      * @param password The user's password.
      */
     private void registerUser(String email, String password) {
+
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getActivity(), "Registration Successful, now try to login with that information", Toast.LENGTH_SHORT).show();
+                        String userId = mAuth.getCurrentUser().getUid();
+
+                        FirebaseFirestore.getInstance().collection(email)
+                                .document(userId)
+                                .set(new HashMap<String, Object>())
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(getActivity(), "Registration Successful, now try to login with that information", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(getActivity(), "Failed to store user ID in Firestore: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                });
+
                     } else {
                         Toast.makeText(getActivity(), "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
