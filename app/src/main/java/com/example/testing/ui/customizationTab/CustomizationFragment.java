@@ -24,6 +24,18 @@ public class CustomizationFragment extends Fragment{
     EditText nameField;
     int currentCustomization = 0;
 
+    /**
+     * Everything that is started when the page is opened
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the fragment
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View CustomizationFragment = inflater.inflate(R.layout.fragment_customization, container, false);
@@ -37,6 +49,13 @@ public class CustomizationFragment extends Fragment{
         return CustomizationFragment;
 
     }
+
+    /**
+     * Assigned all the buttons to their various purposes.
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         view.findViewById(R.id.black_button).setOnClickListener(view18 -> {
             int color = Color.BLACK;
@@ -82,6 +101,11 @@ public class CustomizationFragment extends Fragment{
 
         });
     }
+
+    /**
+     * Class Responsible for changing the color of the enemy
+     * @param color The color that will be set for the enemy
+     */
     private void changeColor(int color) {
         currentEnemy.setColorFilter(color);
 

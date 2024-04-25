@@ -15,6 +15,19 @@ import java.util.Objects;
 public class CustomizationCheckFragment extends Fragment{
 
     private com.example.testing.databinding.FragmentCustomizationcheckBinding binding;
+
+    /**
+     * Sets the listener for the plus button that navigates to the other page.
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the fragment
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -23,16 +36,28 @@ public class CustomizationCheckFragment extends Fragment{
         binding.customizationButton.setOnClickListener(v -> NavHostFragment.findNavController(CustomizationCheckFragment.this).navigate(R.id.action_navigation_customizationcheck_to_navigation_customization));
         return binding.getRoot();
     }
+
+    /**
+     * What is done when the page is closed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
+    /**
+     * Hides the top bar when the page is first opened.
+     */
     @Override
     public void onResume() {
         super.onResume();
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
     }
+
+    /**
+     * Unhides the top bar when the page is closed.
+     */
     @Override
     public void onStop() {
         super.onStop();
