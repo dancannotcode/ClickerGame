@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.testing.R;
+
+import java.util.Objects;
 
 public class CustomizationCheckFragment extends Fragment{
 
@@ -20,15 +20,8 @@ public class CustomizationCheckFragment extends Fragment{
 
         binding = com.example.testing.databinding.FragmentCustomizationcheckBinding.inflate(inflater, container, false);
 
-        binding.customizationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(CustomizationCheckFragment.this).navigate(R.id.action_navigation_customizationcheck_to_navigation_customization);
-            }
-        });
-
+        binding.customizationButton.setOnClickListener(v -> NavHostFragment.findNavController(CustomizationCheckFragment.this).navigate(R.id.action_navigation_customizationcheck_to_navigation_customization));
         return binding.getRoot();
-
     }
     @Override
     public void onDestroyView() {
@@ -38,11 +31,11 @@ public class CustomizationCheckFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
     }
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
     }
 }
