@@ -13,7 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.testing.R;
 import com.example.testing.saveData;
-
+/**
+ * Fragment that allows users to customize aspects of "enemies" within the app.
+ * This class handles user interactions for customizing the appearance and characteristics
+ * of enemies and saving these customizations persistently.
+ */
 public class CustomizationFragment extends Fragment{
 
     ImageView enemy;
