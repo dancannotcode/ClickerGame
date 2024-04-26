@@ -22,9 +22,6 @@ public class saveData {
     int currentProgress = 0;
     AtomicInteger clickNum = new AtomicInteger(0);
 
-    int currentProgress = 0;        // Counter for current progress in the game
-    AtomicInteger clickNum = new AtomicInteger();  // Atomic counter for number of clicks
-
     /**
      * Returns the current number of clicks as an AtomicInteger.
      *
