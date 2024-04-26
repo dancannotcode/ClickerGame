@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * This class is used to test the saveData class to make sure it works properly.
  * @since JDK 17
@@ -69,6 +71,45 @@ public class saveDataTest {
         assertNotEquals("Name: A", virusName[0]);
         assertNotEquals("Name: B", virusName[1]);
         assertNotEquals("Name: C", virusName[2]);
+    }
+
+    @Test
+    public void testGetLevelCount(){
+        saveData level = new saveData();
+        AtomicInteger newLevel = new AtomicInteger(5);
+        level.setLevelCount(newLevel);
+
+        AtomicInteger newLevel1 = new AtomicInteger(6);
+        AtomicInteger newLevel2 = new AtomicInteger(5);
+
+        assertEquals(5, level.getLevelCount().get());
+        level.setLevelCount(newLevel1);
+        assertEquals(6, level.getLevelCount().get());
+        level.setLevelCount(newLevel2);
+
+        assertEquals(5, level.getLevelCount().get());
+
+
+
+    }
+
+    @Test
+    public void testSetLevelCount(){
+        saveData level = new saveData();
+        AtomicInteger newLevel = new AtomicInteger(5);
+
+        level.setLevelCount(newLevel);
+        assertEquals(newLevel.get(),level.getLevelCount().get());
+
+        newLevel.incrementAndGet();
+        level.setLevelCount(newLevel);
+        assertEquals(newLevel.get(),level.getLevelCount().get());
+
+        newLevel.incrementAndGet();
+        level.setLevelCount(newLevel);
+        assertEquals(newLevel.get(),level.getLevelCount().get());
+
+
     }
 
 

@@ -95,7 +95,7 @@ public class collectionFragment extends Fragment{
         saveData saveData = new saveData();
         String[] virusName = saveData.getVirusName();
         int[] virusPicture = saveData.getVirusPicture();
-        saveData.setVirusNamePart("Test", 1);
+      //  saveData.setVirusNamePart("Test", 1);
         String[] virusType = getResources().getStringArray(R.array.virus_type);
         String[] virusColor = getResources().getStringArray(R.array.virus_color);
 
