@@ -2,6 +2,7 @@ package com.example.testing.ui.customizationTab;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,24 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.testing.R;
 import com.example.testing.saveData;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import android.net.Uri;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+
 /**
  * Fragment that allows users to customize aspects of "enemies" within the app.
  * This class handles user interactions for customizing the appearance and characteristics
  * of enemies and saving these customizations persistently.
  */
+
 public class CustomizationFragment extends Fragment{
 
     ImageView enemy;
@@ -97,12 +111,34 @@ public class CustomizationFragment extends Fragment{
         });
         view.findViewById(R.id.submit_Button).setOnClickListener(v -> {
             saveData saveData = new saveData();
+            String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+            assert userEmail != null;
+
             String virusName = nameField.getText().toString();
+
             saveData.setVirusNamePart(virusName, currentCustomization);
             currentCustomization++;
             saveData.setCurrentCustomizations(currentCustomization);
-            NavHostFragment.findNavController(CustomizationFragment.this).navigate(R.id.action_navigation_notifications_to_navigation_customizationcheck);
+            Map<String, Object> virusData = new HashMap<>();
+            virusData.put("virusName", FieldValue.arrayUnion(virusName));
 
+            FirebaseFirestore.getInstance().collection(userEmail).document(userId).update(virusData)// Set the virus data in Firestore
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    // Data successfully added
+                                    currentCustomization++;
+                                    saveData.setCurrentCustomizations(currentCustomization);
+                                    NavHostFragment.findNavController(CustomizationFragment.this)
+                                            .navigate(R.id.action_navigation_notifications_to_navigation_customizationcheck);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                }
+                            });
         });
     }
 
@@ -112,6 +148,30 @@ public class CustomizationFragment extends Fragment{
      */
     private void changeColor(int color) {
         currentEnemy.setColorFilter(color);
+
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        assert userEmail != null;
+
+        // Create a map to store the enemy image
+        Map<String, Object> enemyArr = new HashMap<>();
+        enemyArr.put("enemyImage", FieldValue.arrayUnion(currentEnemy.toString()));
+
+        FirebaseFirestore.getInstance().collection(userEmail).document(userId).update(enemyArr)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                }
+
+                );
 
     }
 }

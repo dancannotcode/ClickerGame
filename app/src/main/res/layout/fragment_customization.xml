@@ -75,30 +75,26 @@
         android:layout_width="141dp"
         android:layout_height="129dp"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="88dp"
         android:layout_marginEnd="214dp"
         android:layout_marginBottom="514dp"
         android:alpha="0.08"
         android:background="@color/Transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/enemy2Button"
         android:layout_width="129dp"
         android:layout_height="130dp"
         android:layout_marginStart="239dp"
-        android:layout_marginTop="83dp"
         android:layout_marginEnd="43dp"
         android:layout_marginBottom="518dp"
         android:alpha="0.08"
         android:background="@color/Transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/purple_button"

@@ -1,9 +1,8 @@
 package com.example.testing;
 
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.auth.FirebaseAuth;
-import java.util.HashMap;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,8 +15,12 @@ public class saveData {
     // Arrays holding names and pictures for virus customizations
     String[] virusName = {"Name: A","Name: B","Name: C","Name: D","Name: E","Name: F","Name: G"};
     int[] virusPicture = {R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark};
-    int currentCustomizations = 0;  // Counter for current number of customizations
-    private int levelCount = 1;     // Counter for the current level
+
+    int currentCustomizations = 0;
+    private AtomicInteger levelCount = new AtomicInteger(1);
+
+    int currentProgress = 0;
+    AtomicInteger clickNum = new AtomicInteger(0);
 
     int currentProgress = 0;        // Counter for current progress in the game
     AtomicInteger clickNum = new AtomicInteger();  // Atomic counter for number of clicks
@@ -57,52 +60,12 @@ public class saveData {
     public void setCurrentCustomizations(int currentCustomizations) {
         this.currentCustomizations = currentCustomizations;
     }
-
-    /**
-     * Retrieves the current level count from Firebase Firestore and updates the local level count.
-     * This method fetches the level count associated with the user's email and unique ID.
-     *
-     * @return the current level count
-     */
-    public int getLevelCount() {
-        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-        // Retrieve levelCount from Firestore document
-        FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists() && documentSnapshot.contains("levelCount")) {
-                        // If document exists and contains "levelCount", retrieve it
-                        levelCount = documentSnapshot.getLong("levelCount").intValue();
-                    } else {
-                        // If the field doesn't exist or document doesn't exist, set levelCount to default
-                        levelCount = 1; // Set to default value if not found
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                });
+    public AtomicInteger getLevelCount() {
         return levelCount;
     }
 
-    /**
-     * Sets the level count in Firebase Firestore based on the user's email and unique ID.
-     *
-     * @param levelCount the new level count to set
-     */
-    public void setLevelCount(int levelCount) {
-        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-        // Set the levelCount field in Firestore document
-        FirebaseFirestore.getInstance().collection(userEmail).document(userId)
-                .update("levelCount", levelCount)
-                .addOnSuccessListener(aVoid -> {
-                    // Successfully updated levelCount in Firebase
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                });
+    public void setLevelCount(AtomicInteger levelCount) {
+       this.levelCount = levelCount;
     }
 
     /**

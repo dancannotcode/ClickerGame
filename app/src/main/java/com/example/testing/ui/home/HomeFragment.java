@@ -2,6 +2,7 @@ package com.example.testing.ui.home;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,7 @@ import com.example.testing.saveData;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -41,7 +40,6 @@ public class HomeFragment extends Fragment {
     private ProgressBar progressBar;
     private saveData saveData;
 
-
     TextView showLevelTextView;
 
     /**
@@ -61,18 +59,11 @@ public class HomeFragment extends Fragment {
         enemies[2] = fragmentHomeLayout.findViewById(R.id.imageView3);
         enemies[3] = fragmentHomeLayout.findViewById(R.id.imageView4);
         enemies[4] = fragmentHomeLayout.findViewById(R.id.imageView5);
+
         showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
-
         saveData = new saveData();
+        fetchAndUpdateLevelCount();
         currentProgress = saveData.getCurrentProgress();
-        int levelCount = saveData.getLevelCount();
-        saveData.setLevelCount(levelCount);
-
-        // Get the value of the text view and set level from save.
-        String countString = showLevelTextView.getText().toString();
-        Integer count = Integer.parseInt(countString);
-        count = count + levelCount;
-        showLevelTextView.setText(count.toString());
 
         // Set OnClickListener to move the ImageView to a different spot when clicked
             // Set OnClickListener to move the ImageView to a different spot when clicked
@@ -100,6 +91,12 @@ public class HomeFragment extends Fragment {
 
         }
 
+    private void fetchAndUpdateLevelCount() {
+        // Fetch levelCount from saveData
+        AtomicInteger levelCount = saveData.getLevelCount();
+        // Update UI with fetched levelCount
+        showLevelTextView.setText(String.valueOf(levelCount));
+    }
     /**
      * Randomly moves an ImageView to simulate enemy movement.
      * @param imageView The ImageView to move.
@@ -147,16 +144,13 @@ public class HomeFragment extends Fragment {
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         //create
-        saveData saveData = new saveData();
-
-        int score = 0;
 
         assert userEmail != null;
         FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
                     AtomicInteger clicksMade = saveData.getClickNum();
                     if (documentSnapshot.exists() && documentSnapshot.contains("Clicks_Made")) {
-                        // If document exists and contains "Clicks_Made", retrieve clicks made
+                        // If document exists retrieve clicks made
                         clicksMade.set(documentSnapshot.getLong("Clicks_Made").intValue());
                     } else {
                         // If the field doesn't exist or document doesn't exist, set clicksMade to 0
@@ -170,14 +164,18 @@ public class HomeFragment extends Fragment {
                     FirebaseFirestore.getInstance().collection(userEmail).document(userId)
                             .set(new HashMap<String, Object>() {{
                                 put("Clicks_Made", clicksMade.intValue());
-                            }});
-
-                    // Your existing code to update level and progress goes here
-                    // Make sure to include appropriate error handling for other operations
+                            }})
+                            .addOnSuccessListener(aVoid -> {
+                                // Successfully updated Clicks_Made in Firestore
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle failure
+                            });
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
-                });// Get the value of the text view
+                });
+        // Get the value of the text view
         String countString = showLevelTextView.getText().toString();
         Integer count = Integer.parseInt(countString);
 
@@ -185,26 +183,45 @@ public class HomeFragment extends Fragment {
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
 
 
-        int levelCount = saveData.getLevelCount();
-
-        int level = levelCount * 100;
+        AtomicInteger levelCount;
+        levelCount = saveData.getLevelCount();
+        int level = levelCount.get() * 100;
 
         // Reset progress bar to show leveling up
         if(currentProgress >= level)
         {
             currentProgress = 0;
             // Convert value to a number and increment it
-            count++;
-            levelCount = count;
+            int currLevelCount = levelCount.incrementAndGet();
+            levelCount.set(currLevelCount);
         }
 
         Random r = new Random();
         int randExp = r.nextInt(15) + 1;
         currentProgress = currentProgress + randExp;
-        progressBar.setProgress(currentProgress);
+        if (progressBar != null) {
+            progressBar.setProgress(currentProgress);
+            progressBar.setMax(level);
+        }
+
         saveData.setLevelCount(levelCount);
-        progressBar.setMax(level);
-        showLevelTextView.setText(count.toString());
+        showLevelTextView.setText(String.valueOf(levelCount.get()));
+
+        FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    AtomicInteger finalLevelCount = levelCount;
+                    Log.v("level: ", String.valueOf(finalLevelCount));
+                    if (documentSnapshot.exists() && documentSnapshot.contains("LevelCount")) { // Change to "LevelCount"
+                        // If document exists and contains "LevelCount", retrieve it
+                        finalLevelCount.set((int) (long) documentSnapshot.getLong("LevelCount"));
+                        saveData.setLevelCount(levelCount);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                    Log.e("FirestoreUpdate", "Failed to update LevelCount: " + e.getMessage());
+
+                });
     }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
@@ -215,6 +232,16 @@ public class HomeFragment extends Fragment {
 // *
 // ***************************************************************************************/
 
+    @Override
+    public void onPause() {
+        saveDataToFirestore();
+        super.onPause();
+    }
+    @Override
+    public void onStop() {
+        saveDataToFirestore();
+        super.onStop();
+    }
 
     /**
      * Cleans up resources when the View is about to be destroyed.
@@ -222,6 +249,25 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        saveDataToFirestore();
         binding = null;
+    }
+
+    private void saveDataToFirestore() {
+        // Add the code to save data to Firestore here
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        // Update Firestore with the latest data
+        FirebaseFirestore.getInstance().collection(userEmail).document(userId)
+
+                .update("LevelCount", saveData.getLevelCount().get()) // Save the levelCount value
+                .addOnSuccessListener(aVoid -> {
+                    // Successfully updated levelCount in Firestore
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                    Log.e("FirestoreUpdate", "Failed to update LevelCount: " + e.getMessage());
+                });
     }
 }
