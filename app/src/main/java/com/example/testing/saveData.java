@@ -14,7 +14,7 @@ public class saveData {
     private AtomicInteger levelCount = new AtomicInteger(1);
 
     int currentProgress = 0;
-    AtomicInteger clickNum = new AtomicInteger();
+    AtomicInteger clickNum = new AtomicInteger(0);
 
 
     public AtomicInteger getClickNum() {

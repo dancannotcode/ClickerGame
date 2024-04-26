@@ -2,6 +2,7 @@ package com.example.testing.ui.home;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,13 @@ public class HomeFragment extends Fragment {
     private saveData saveData;
 
     TextView showLevelTextView;
+   // @Override
+    //public void onCreate(Bundle savedInstanceState) {
+    //    saveData = new saveData();
+     //   fetchAndUpdateLevelCount();
+      //  super.onCreate(savedInstanceState);
+        // Perform any additional initialization tasks for the fragment here
+    //}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +83,6 @@ public class HomeFragment extends Fragment {
                     }
                 });
             }
-
             return binding.getRoot();
 
         }
@@ -170,33 +177,41 @@ public class HomeFragment extends Fragment {
         levelCount = saveData.getLevelCount();
         int level = levelCount.get() * 100;
 
-        AtomicInteger finalLevelCount = levelCount;
-        FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists() && documentSnapshot.contains("LevelCount")) { // Change to "LevelCount"
-                        // If document exists and contains "LevelCount", retrieve it
-                        finalLevelCount.set((int) (long) documentSnapshot.getLong("LevelCount"));
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                });
         // Reset progress bar to show leveling up
         if(currentProgress >= level)
         {
             currentProgress = 0;
             // Convert value to a number and increment it
-            int currLevelCount = finalLevelCount.incrementAndGet();
+            int currLevelCount = levelCount.incrementAndGet();
             levelCount.set(currLevelCount);
         }
 
         Random r = new Random();
         int randExp = r.nextInt(15) + 1;
         currentProgress = currentProgress + randExp;
-        progressBar.setProgress(currentProgress);
-        progressBar.setMax(level);
+        if (progressBar != null) {
+            progressBar.setProgress(currentProgress);
+            progressBar.setMax(level);
+        }
+
         saveData.setLevelCount(levelCount);
         showLevelTextView.setText(String.valueOf(levelCount.get()));
+
+        FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    AtomicInteger finalLevelCount = levelCount;
+                    Log.v("level: ", String.valueOf(finalLevelCount));
+                    if (documentSnapshot.exists() && documentSnapshot.contains("LevelCount")) { // Change to "LevelCount"
+                        // If document exists and contains "LevelCount", retrieve it
+                        finalLevelCount.set((int) (long) documentSnapshot.getLong("LevelCount"));
+                        saveData.setLevelCount(levelCount);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                    Log.e("FirestoreUpdate", "Failed to update LevelCount: " + e.getMessage());
+
+                });
     }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
@@ -231,12 +246,14 @@ public class HomeFragment extends Fragment {
 
         // Update Firestore with the latest data
         FirebaseFirestore.getInstance().collection(userEmail).document(userId)
+
                 .update("LevelCount", saveData.getLevelCount().get()) // Save the levelCount value
                 .addOnSuccessListener(aVoid -> {
                     // Successfully updated levelCount in Firestore
                 })
                 .addOnFailureListener(e -> {
                     // Handle failure
+                    Log.e("FirestoreUpdate", "Failed to update LevelCount: " + e.getMessage());
                 });
     }
 }
