@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.testing.R;
 import com.example.testing.databinding.FragmentLoginBinding;
-import com.example.testing.ui.Homepage.HomepageFragment;
+import com.example.testing.ui.Login.LoginFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 

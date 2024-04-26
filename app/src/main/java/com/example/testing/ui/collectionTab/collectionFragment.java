@@ -15,16 +15,28 @@ import com.example.testing.databinding.FragmentCollectionBinding;
 import com.example.testing.virusModel;
 import com.example.testing.virus_RecyclerViewAdapter;
 import java.util.ArrayList;
+import java.util.Objects;
+
 import com.example.testing.saveData;
 
 
 public class collectionFragment extends Fragment{
 
     ArrayList<virusModel> virusModel = new ArrayList<>();
-    String[] virusName = {"Name: ???????","Name: ???????","Name: ???????","Name: ???????","Name: ???????","Name: ???????","Name: ???????"};
-    int[] virusPicture = {R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark,R.drawable.question_mark};
     private FragmentCollectionBinding binding;
 
+    /**
+     * Class that runs everything need immediately to make the page
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the fragment
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -63,7 +75,7 @@ public class collectionFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
     }
     /**
      * This class unhides the top action bar when the page is no longer in focus.
@@ -71,7 +83,7 @@ public class collectionFragment extends Fragment{
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
     }
 
     /**

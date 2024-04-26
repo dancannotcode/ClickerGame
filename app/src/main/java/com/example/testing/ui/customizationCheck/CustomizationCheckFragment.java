@@ -4,45 +4,63 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-
 import com.example.testing.R;
+
+import java.util.Objects;
 
 public class CustomizationCheckFragment extends Fragment{
 
     private com.example.testing.databinding.FragmentCustomizationcheckBinding binding;
+
+    /**
+     * Sets the listener for the plus button that navigates to the other page.
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the fragment
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = com.example.testing.databinding.FragmentCustomizationcheckBinding.inflate(inflater, container, false);
 
-        binding.customizationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment.findNavController(CustomizationCheckFragment.this).navigate(R.id.action_navigation_customizationcheck_to_navigation_customization);
-            }
-        });
-
+        binding.customizationButton.setOnClickListener(v -> NavHostFragment.findNavController(CustomizationCheckFragment.this).navigate(R.id.action_navigation_customizationcheck_to_navigation_customization));
         return binding.getRoot();
-
     }
+
+    /**
+     * What is done when the page is closed
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
+
+    /**
+     * Hides the top bar when the page is first opened.
+     */
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).hide();
     }
+
+    /**
+     * Unhides the top bar when the page is closed.
+     */
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).show();
     }
 }
