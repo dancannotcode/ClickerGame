@@ -19,7 +19,10 @@ import java.util.Objects;
 
 import com.example.testing.saveData;
 
-
+/**
+ * A Fragment for displaying a collection of viruses that the user has created or modified.
+ * This fragment uses a RecyclerView to list each virus along with its properties, such as type, color, and name.
+ */
 public class collectionFragment extends Fragment{
 
     ArrayList<virusModel> virusModel = new ArrayList<>();

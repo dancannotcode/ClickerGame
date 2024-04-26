@@ -14,6 +14,165 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class saveDataTest {
 
     /**
+     * Test method for {@link saveData#getClickNum()}
+     */
+    @Test
+    public void testGetClickNum(){
+
+        saveData entryA = new saveData();
+        AtomicInteger expected1 = new AtomicInteger();
+
+        // AtomicInteger(expected1) = 1
+        expected1.incrementAndGet();
+        entryA.setClickNum(expected1);
+        assertEquals(expected1, entryA.getClickNum());
+
+        // AtomicInteger(expected1) = 3
+        expected1.incrementAndGet();
+        expected1.incrementAndGet();
+        entryA.setClickNum(expected1);
+        assertEquals(expected1, entryA.getClickNum());
+
+        // AtomicInteger(expected1) = 2
+        expected1.getAndDecrement();
+        entryA.setClickNum(expected1);
+        assertEquals(expected1, entryA.getClickNum());
+    }
+
+    /**
+     * Test method for {@link saveData#setClickNum(AtomicInteger)}
+     */
+    @Test
+    public void testSetClickNum(){
+
+        saveData entryA = new saveData();
+        AtomicInteger expected1 = new AtomicInteger();
+
+
+        // AtomicInteger(expected1) = 2
+        expected1.incrementAndGet();
+        expected1.incrementAndGet();
+        entryA.setClickNum(expected1);
+        assertEquals(expected1, entryA.getClickNum());
+
+        // AtomicInteger(expected1) = 4
+        expected1.incrementAndGet();
+        expected1.incrementAndGet();
+        entryA.setClickNum(expected1);
+        assertEquals(expected1, entryA.getClickNum());
+
+        // AtomicInteger(expected1) = 3
+        expected1.getAndDecrement();
+        entryA.setClickNum(expected1);
+        assertEquals(expected1, entryA.getClickNum());
+
+
+    }
+
+    /**
+     * Test method for {@link saveData#getCurrentCustomizations()}
+     */
+    @Test
+    public void testGetCurrentCustomizations(){
+
+        saveData entryA = new saveData();
+        int expected1 = 0;
+
+        expected1 = 1;
+        entryA.setCurrentCustomizations(expected1);
+        assertEquals(expected1, entryA.getCurrentCustomizations());
+        assertNotEquals(2, entryA.getCurrentCustomizations());
+
+        expected1 = 5;
+        entryA.setCurrentCustomizations(expected1);
+        assertEquals(expected1, entryA.getCurrentCustomizations());
+        assertNotEquals(6, entryA.getCurrentCustomizations());
+
+        expected1 = 10;
+        entryA.setCurrentCustomizations(expected1);
+        assertEquals(expected1, entryA.getCurrentCustomizations());
+        assertNotEquals(11, entryA.getCurrentCustomizations());
+
+    }
+
+    /**
+     * Test method for {@link saveData#setCurrentCustomizations(int)}
+     */
+    @Test
+    public void testSetCurrentCustomizations(){
+
+        saveData entryA = new saveData();
+        int expected1 = 0;
+
+        expected1 = 2;
+        entryA.setCurrentCustomizations(expected1);
+        assertEquals(expected1, entryA.getCurrentCustomizations());
+        assertNotEquals(1, entryA.getCurrentCustomizations());
+
+        expected1 = 6;
+        entryA.setCurrentCustomizations(expected1);
+        assertEquals(expected1, entryA.getCurrentCustomizations());
+        assertNotEquals(5, entryA.getCurrentCustomizations());
+
+        expected1 = 9;
+        entryA.setCurrentCustomizations(expected1);
+        assertEquals(expected1, entryA.getCurrentCustomizations());
+        assertNotEquals(8, entryA.getCurrentCustomizations());
+
+    }
+
+    /**
+     * Test method for {@link saveData#getCurrentProgress()}
+     */
+    @Test
+    public void getCurrentProgress(){
+        saveData entryA = new saveData();
+        int expected1 = 0;
+
+        expected1 = 25;
+        entryA.setCurrentProgress(expected1);
+        assertEquals(expected1, entryA.getCurrentProgress());
+        assertNotEquals(24, entryA.getCurrentProgress());
+
+        expected1 = 50;
+        entryA.setCurrentProgress(expected1);
+        assertEquals(expected1, entryA.getCurrentProgress());
+        assertNotEquals(49, entryA.getCurrentProgress());
+
+        expected1 = 75;
+        entryA.setCurrentProgress(expected1);
+        assertEquals(expected1, entryA.getCurrentProgress());
+        assertNotEquals(74, entryA.getCurrentProgress());
+
+    }
+
+    /**
+     * Test method for {@link saveData#setCurrentProgress(int)}
+     */
+    @Test
+    public void setCurrentProgress(){
+
+        saveData entryA = new saveData();
+        int expected1 = 0;
+
+        expected1 = 100;
+        entryA.setCurrentProgress(expected1);
+        assertEquals(expected1, entryA.getCurrentProgress());
+        assertNotEquals(99, entryA.getCurrentProgress());
+
+        expected1 = 90;
+        entryA.setCurrentProgress(expected1);
+        assertEquals(expected1, entryA.getCurrentProgress());
+        assertNotEquals(89, entryA.getCurrentProgress());
+
+        expected1 = 80;
+        entryA.setCurrentProgress(expected1);
+        assertEquals(expected1, entryA.getCurrentProgress());
+        assertNotEquals(79, entryA.getCurrentProgress());
+
+    }
+
+    /**
      * Test method for {@link saveData#getVirusPicture()}
      */
     @Test
@@ -111,6 +270,4 @@ public class saveDataTest {
 
 
     }
-
-
 }

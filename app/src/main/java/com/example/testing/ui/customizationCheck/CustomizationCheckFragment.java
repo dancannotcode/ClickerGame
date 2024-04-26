@@ -11,7 +11,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.testing.R;
 
 import java.util.Objects;
-
+/**
+ * A Fragment for verifying and reviewing customization choices made by the user.
+ * This fragment displays the final selections and allows navigation back to the customization screen
+ * for any necessary adjustments. It also manages the visibility of the app's action bar to focus user attention
+ * on the content.
+ */
 public class CustomizationCheckFragment extends Fragment{
 
     private com.example.testing.databinding.FragmentCustomizationcheckBinding binding;

@@ -34,7 +34,10 @@ public class HomepageViewModel extends ViewModel {
      * (HomepageFragment) to observe changes to the text, enabling the fragment to update what is displayed
      * on the screen whenever the data changes.
      *
-     * @return LiveData<String> The current message that is being observed for changes.
+     *
+     *  Returns the current message that is being observed for changes.
+     *  @return the current message as LiveData.
+     *
      */
     public LiveData<String> getText() {
         return mText;

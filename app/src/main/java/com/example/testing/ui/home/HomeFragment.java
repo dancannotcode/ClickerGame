@@ -22,7 +22,11 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * A Fragment representing the home screen of the application.
+ * This fragment is responsible for managing interaction with enemies on the screen,
+ * playing sounds, and handling game progression based on user interaction.
+ */
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
@@ -37,14 +41,14 @@ public class HomeFragment extends Fragment {
     private saveData saveData;
 
     TextView showLevelTextView;
-   // @Override
-    //public void onCreate(Bundle savedInstanceState) {
-    //    saveData = new saveData();
-     //   fetchAndUpdateLevelCount();
-      //  super.onCreate(savedInstanceState);
-        // Perform any additional initialization tasks for the fragment here
-    //}
 
+    /**
+     * Inflates the home fragment view, initializes components, and sets up click listeners.
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return the root View of the inflated layout, to be attached to the fragment's UI.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
@@ -93,7 +97,10 @@ public class HomeFragment extends Fragment {
         // Update UI with fetched levelCount
         showLevelTextView.setText(String.valueOf(levelCount));
     }
-
+    /**
+     * Randomly moves an ImageView to simulate enemy movement.
+     * @param imageView The ImageView to move.
+     */
     private void moveImage(ImageView imageView) {
         if (isImageVisible) {
             // If image is visible, change its position
@@ -129,7 +136,10 @@ public class HomeFragment extends Fragment {
         // Toggle the visibility state
         isImageVisible = !isImageVisible;
     }
-
+    /**
+     * Manages game progression based on user interactions.
+     * @param v The view that was clicked.
+     */
     private void clickProgression(View v) {
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -232,6 +242,10 @@ public class HomeFragment extends Fragment {
         saveDataToFirestore();
         super.onStop();
     }
+
+    /**
+     * Cleans up resources when the View is about to be destroyed.
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();

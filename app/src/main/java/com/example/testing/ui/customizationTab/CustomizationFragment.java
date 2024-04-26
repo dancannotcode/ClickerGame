@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import com.example.testing.R;
 import com.example.testing.saveData;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +24,13 @@ import android.net.Uri;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+
+/**
+ * Fragment that allows users to customize aspects of "enemies" within the app.
+ * This class handles user interactions for customizing the appearance and characteristics
+ * of enemies and saving these customizations persistently.
+ */
 
 public class CustomizationFragment extends Fragment{
 
