@@ -143,5 +143,29 @@ public class CustomizationFragment extends Fragment{
     private void changeColor(int color) {
         currentEnemy.setColorFilter(color);
 
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        assert userEmail != null;
+
+        // Create a map to store the enemy image
+        Map<String, Object> enemyArr = new HashMap<>();
+        enemyArr.put("enemyImage", FieldValue.arrayUnion(currentEnemy.toString()));
+
+        FirebaseFirestore.getInstance().collection(userEmail).document(userId).update(enemyArr)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                }
+
+                );
+
     }
 }
