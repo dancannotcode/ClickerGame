@@ -23,7 +23,11 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * A Fragment representing the home screen of the application.
+ * This fragment is responsible for managing interaction with enemies on the screen,
+ * playing sounds, and handling game progression based on user interaction.
+ */
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;

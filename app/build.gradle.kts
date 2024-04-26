@@ -52,6 +52,12 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(fileTree(mapOf(
+        "dir" to "/Users/andrewnguyen/Library/Android/sdk/platforms/android-34/",
+        "include" to listOf("*.aar", "*.jar"),
+
+    )))
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
