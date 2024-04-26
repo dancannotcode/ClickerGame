@@ -35,8 +35,9 @@ public class HomeFragment extends Fragment {
 
     private int currentProgress = 0;
     private ProgressBar progressBar;
+    private saveData saveData;
 
-    private int levelCount = 0;
+
     TextView showLevelTextView;
 
 
@@ -51,9 +52,11 @@ public class HomeFragment extends Fragment {
         enemies[3] = fragmentHomeLayout.findViewById(R.id.imageView4);
         enemies[4] = fragmentHomeLayout.findViewById(R.id.imageView5);
         showLevelTextView = fragmentHomeLayout.findViewById(R.id.text_level);
-        saveData saveData = new saveData();
+
+        saveData = new saveData();
         currentProgress = saveData.getCurrentProgress();
-        levelCount = saveData.getLevelCount();
+        int levelCount = saveData.getLevelCount();
+        saveData.setLevelCount(levelCount);
 
         // Get the value of the text view and set level from save.
         String countString = showLevelTextView.getText().toString();
@@ -125,33 +128,48 @@ public class HomeFragment extends Fragment {
     }
 
     private void clickProgression(View v) {
-        //get user ID to track score/click count
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        //create
+        saveData saveData = new saveData();
 
         int score = 0;
 
         assert userEmail != null;
         FirebaseFirestore.getInstance().collection(userEmail).document(userId).get()
                 .addOnSuccessListener(documentSnapshot -> {
-                            AtomicInteger clicksMade = new AtomicInteger();
-                            if (documentSnapshot.exists()) {
-                                // If document exists, retrieve clicks made
-                                clicksMade.set(documentSnapshot.getLong("Clicks_Made").intValue());
-                            }
-        //increase clicks made
-        clicksMade.incrementAndGet();
-        //stores the click made
+                    AtomicInteger clicksMade = saveData.getClickNum();
+                    if (documentSnapshot.exists() && documentSnapshot.contains("Clicks_Made")) {
+                        // If document exists and contains "Clicks_Made", retrieve clicks made
+                        clicksMade.set(documentSnapshot.getLong("Clicks_Made").intValue());
+                    } else {
+                        // If the field doesn't exist or document doesn't exist, set clicksMade to 0
+                        clicksMade.set(0);
+                    }
+                    //increase clicks made
+                    clicksMade.incrementAndGet();
+
+                    saveData.setClickNum(clicksMade);
+                    //stores the click made
                     FirebaseFirestore.getInstance().collection(userEmail).document(userId)
                             .set(new HashMap<String, Object>() {{
                                 put("Clicks_Made", clicksMade.intValue());
                             }});
-        // Get the value of the text view
+
+                    // Your existing code to update level and progress goes here
+                    // Make sure to include appropriate error handling for other operations
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                });// Get the value of the text view
         String countString = showLevelTextView.getText().toString();
         Integer count = Integer.parseInt(countString);
 
         // Display the new value in the text view.
         progressBar = binding.getRoot().findViewById(R.id.progress_Horizontal);
+
+
+        int levelCount = saveData.getLevelCount();
 
         int level = levelCount * 100;
 
@@ -168,9 +186,9 @@ public class HomeFragment extends Fragment {
         int randExp = r.nextInt(15) + 1;
         currentProgress = currentProgress + randExp;
         progressBar.setProgress(currentProgress);
+        saveData.setLevelCount(levelCount);
         progressBar.setMax(level);
         showLevelTextView.setText(count.toString());
-                });
     }
 // ***************************************************************************************/
 // *    Title: MediaPlayer sound source code
