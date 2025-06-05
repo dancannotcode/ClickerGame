@@ -39,7 +39,6 @@ this is the gameplay for viral clicker as the enemy widgets move then the player
 * Kotlin
 
 ## Setup Instructions
-Explain how to set up and run the project locally. For example:
 1. Copy URL[https://github.com/dancannotcode/ExpenseTrackingAndroidApp.git]
 2. Install [Android Stuidos](https://developer.android.com/studio)
 3. Run the application
