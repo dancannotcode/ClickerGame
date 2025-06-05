@@ -141,12 +141,10 @@ private void moveImage(ImageView imageView) {
 * _Completed_: No further updates planned, but open to feedback and collaboration.
 
 ## Challenges
-Document any challenges faced during the project:
 * Handling Firebase. 
 * Integration of multiple different imports.
 
 ## Learnings
-Highlight the key takeaways from the project:
 * Improve understanding of FireBase techniques.
 * Improved skills in debugging deployment issues.
 * Learned to manage collaborative projects efficiently.
